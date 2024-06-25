@@ -1,0 +1,26 @@
+{
+  "name": "nginx-demo",
+  "version": "1.0.0",
+  "description": "nginx reverse proxy & API gateway demo",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sarubhai/nginx-demo.git"
+  },
+  "keywords": [
+    "Node.js",
+    "Nginx Reverse Proxy",
+    "Nginx API Gateway",
+    "REST API"
+  ],
+  "author": "Saurav Mitra <saurav.karate@gmail.com>",
+  "license": "ISC",
+  "homepage": "https://appdev24.com/pages/44/docker-nginx-reverse-proxy",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

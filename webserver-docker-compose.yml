@@ -1,0 +1,23 @@
+version: '3.9'
+
+services:
+  nginx-webserver:
+    # Apple M1 Chip
+    platform: linux/amd64
+    image: nginx:latest
+    container_name: nginx-webserver
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./nginx-webserver.conf:/etc/nginx/nginx.conf:ro
+      - ./webserver.html:/usr/share/nginx/html/index.html:ro
+      - ./selfsigned.crt:/etc/ssl/certs/selfsigned.crt:ro
+      - ./selfsigned.key:/etc/ssl/private/selfsigned.key:ro
+    networks:
+      - backend-network
+
+networks:
+  backend-network:
+    driver: bridge

@@ -1,0 +1,48 @@
+version: '3.9'
+
+services:
+  nginx-reverseproxy:
+    # Apple M1 Chip
+    platform: linux/amd64
+    image: nginx:latest
+    container_name: nginx-reverseproxy
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./nginx-reverseproxy.conf:/etc/nginx/nginx.conf:ro
+      - ./selfsigned.crt:/etc/ssl/certs/selfsigned.crt:ro
+      - ./selfsigned.key:/etc/ssl/private/selfsigned.key:ro
+    networks:
+      - backend-network
+
+  ms1-python-app:
+    # Apple M1 Chip
+    platform: linux/amd64
+    build:
+      context: .
+      dockerfile: Python-Dockerfile
+    container_name: ms1-python-app
+    restart: always
+    ports:
+      - 5000:5000
+    networks:
+      - backend-network
+
+  ms2-nodejs-app:
+    # Apple M1 Chip
+    platform: linux/amd64
+    build:
+      context: .
+      dockerfile: Nodejs-Dockerfile
+    container_name: ms2-nodejs-app
+    restart: always
+    ports:
+      - 3000:3000
+    networks:
+      - backend-network
+
+networks:
+  backend-network:
+    driver: bridge
